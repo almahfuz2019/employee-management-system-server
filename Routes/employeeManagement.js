@@ -54,29 +54,29 @@ function employeeManagement(app) {
      // });
      app.post("/", async (req, res) => {
           try {
-            // Check if the employee already exists based on first name and last name
-            const existingEmployee = await employeeDataModel.findOne({
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-            });
-        
-            if (existingEmployee) {
-              // Employee with the same first name and last name already exists
-              return res.status(400).send({ message: 'Employee already exists' });
-            }
-            const newEmployee = new employeeDataModel({
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-              position: req.body.position,
-              salary: req.body.salary,
-            });
-            const data = await newEmployee.save();
-            res.status(201).send({ data });
+               // Check if the employee already exists based on first name and last name
+               const existingEmployee = await employeeDataModel.findOne({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+               });
+
+               if (existingEmployee) {
+                    // Employee with the same first name and last name already exists
+                    return res.status(400).send({ message: 'Employee already exists' });
+               }
+               const newEmployee = new employeeDataModel({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    position: req.body.position,
+                    salary: req.body.salary,
+               });
+               const data = await newEmployee.save();
+               res.status(201).send({ data });
           } catch (error) {
-            res.status(500).send({ message: error.message });
+               res.status(500).send({ message: error.message });
           }
-        });
-        
+     });
+
 
      // Get all employees
      app.get("/allemployees", async (req, res) => {
